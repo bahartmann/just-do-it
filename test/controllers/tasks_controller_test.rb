@@ -4,8 +4,9 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
 
   setup do
-    sign_in users(:bob)
     @task = tasks(:one)
+    @user = users(:bob)
+    sign_in @user
   end
 
   test "should get index" do
@@ -20,7 +21,11 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
 
   test "should create task" do
     assert_difference('Task.count') do
-      post tasks_url, params: { task: { description: @task.description, done: @task.done } }
+      post tasks_url, params: { task: {
+        description: @task.description,
+        done: @task.done,
+        user_id: @user.id }
+      }
     end
 
     assert_redirected_to tasks_url
