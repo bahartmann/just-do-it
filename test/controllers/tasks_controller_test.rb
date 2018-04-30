@@ -9,18 +9,6 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     sign_in @user
   end
 
-  test "should create task" do
-    assert_difference('Task.count') do
-      post tasks_url, params: { task: {
-        description: @task.description,
-        done: @task.done,
-        user_id: @user.id }
-      }
-    end
-
-    assert_redirected_to tasks_url
-  end
-
   test "should get edit" do
     get edit_task_url(@task)
     assert_response :success

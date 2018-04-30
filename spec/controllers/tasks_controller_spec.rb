@@ -27,4 +27,18 @@ RSpec.describe TasksController, type: :controller do
       expect(response).to render_template(:new)
     end
   end
+
+  describe 'POST new' do
+    let(:task_params) { { task: FactoryBot.attributes_for(:task) } }
+    it 'should create new task' do
+      expect{
+        post :create, params: task_params
+      }.to change(Task, :count).by(1)
+    end
+
+    it 'should resdirect to index' do
+      post :create, params: task_params
+      expect(response).to redirect_to(tasks_url)
+    end
+  end
 end

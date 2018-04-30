@@ -10,5 +10,6 @@ FactoryBot.define do
   factory :task, class: Task do
     description "Something to do"
     done false
+    user_id 1
   end
 end
