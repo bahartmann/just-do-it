@@ -27,3 +27,6 @@ config/environment_variables.yml
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# Ignore rspec example status
+spec/examples.txt
