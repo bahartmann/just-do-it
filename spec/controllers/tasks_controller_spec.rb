@@ -41,4 +41,11 @@ RSpec.describe TasksController, type: :controller do
       expect(response).to redirect_to(tasks_url)
     end
   end
+
+  describe 'GET edit', focus: true do
+    it 'should render edit template' do
+      get :edit, params: { id: task.id }
+      expect(response).to render_template(:edit)
+    end
+  end
 end

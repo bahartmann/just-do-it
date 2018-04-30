@@ -9,11 +9,6 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     sign_in @user
   end
 
-  test "should get edit" do
-    get edit_task_url(@task)
-    assert_response :success
-  end
-
   test "should update task" do
     patch task_url(@task), params: { task: { description: @task.description, done: @task.done } }
     assert_redirected_to tasks_url
