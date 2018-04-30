@@ -28,7 +28,7 @@ RSpec.describe TasksController, type: :controller do
     end
   end
 
-  describe 'POST new' do
+  describe 'POST create' do
     let(:task_params) { { task: FactoryBot.attributes_for(:task) } }
 
     it 'should create new task' do
@@ -69,4 +69,18 @@ RSpec.describe TasksController, type: :controller do
     end
   end
 
+  describe 'DELETE destroy' do
+    it 'destroy task' do
+      task = FactoryBot.create :task
+      expect{
+        delete :destroy, params: { id: task.id }
+      }.to change(Task, :count).by(-1)
+    end
+
+    it 'should redirect to index' do
+      task = FactoryBot.create :task
+      delete :destroy, params: { id: task.id }
+      expect(response).to redirect_to(tasks_url)
+    end
+  end
 end
