@@ -7,7 +7,8 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
-require "capybara/rspec"
+require 'capybara/rspec'
+require 'support/factory_bot'
 
 # The following line is provided for convenience purposes. It has the downside
 # of increasing the boot-up time by auto-requiring all files in the support
@@ -46,6 +47,9 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 
+  # Add Devise test helpers
+  config.include Warden::Test::Helpers, type: :controller
+  config.include Devise::Test::ControllerHelpers, type: :controller
 end
 
 Shoulda::Matchers.configure do |config|
