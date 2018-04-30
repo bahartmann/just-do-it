@@ -30,22 +30,43 @@ RSpec.describe TasksController, type: :controller do
 
   describe 'POST new' do
     let(:task_params) { { task: FactoryBot.attributes_for(:task) } }
+
     it 'should create new task' do
       expect{
         post :create, params: task_params
       }.to change(Task, :count).by(1)
     end
 
-    it 'should resdirect to index' do
+    it 'should redirect to index' do
       post :create, params: task_params
       expect(response).to redirect_to(tasks_url)
     end
   end
 
-  describe 'GET edit', focus: true do
+  describe 'GET edit' do
     it 'should render edit template' do
       get :edit, params: { id: task.id }
       expect(response).to render_template(:edit)
     end
   end
+
+  describe 'PUT update' do
+    let(:undone_task) { FactoryBot.create :task, done: false }
+
+    it 'should update existent task' do
+      put :update, params: {
+          id: undone_task.id, task: { done: true }
+      }
+      undone_task.reload
+      expect(undone_task.done).to be true
+    end
+
+    it 'should redirect to index' do
+      put :update, params: {
+          id: undone_task.id, task: { done: true }
+      }
+      expect(response).to redirect_to(tasks_url)
+    end
+  end
+
 end
