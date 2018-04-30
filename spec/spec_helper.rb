@@ -15,7 +15,7 @@ RSpec.configure do |config|
 
   config.default_formatter = "doc" if config.files_to_run.one?
 
-  config.profile_examples = 5
+  # config.profile_examples = 5
 
   # Run specs in random order to surface order dependencies. If you find an
   # order dependency and want to debug it, you can fix the order by providing
