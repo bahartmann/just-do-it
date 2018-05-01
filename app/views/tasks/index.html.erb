@@ -5,7 +5,7 @@
     <table class="table table-hover">
       <tbody>
         <% @tasks.each do |task| %>
-          <tr>
+          <tr class="task">
             <td><%= task.done %></td>
             <td><%= task.description %></td>
             <td><%= link_to 'Edit', edit_task_path(task) %></td>

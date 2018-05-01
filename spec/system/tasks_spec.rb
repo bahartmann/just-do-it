@@ -37,6 +37,18 @@ RSpec.feature "Tasks", type: :system do
     expect(page).to have_content "Read newspaper"
   end
 
+  scenario "user marks Task as done" do
+    task = FactoryBot.create(:task, description: "Read book", user_id: user.id)
+
+    login_as user
+    visit tasks_url
+
+    click_link "Edit"
+    check "Done"
+    click_button "Update Task"
+    expect(page.first(".task")).to have_content "true"
+  end
+
   scenario "user destroys Task", js: true do
     task = FactoryBot.create(:task, description: "Read book", user_id: user.id)
 
