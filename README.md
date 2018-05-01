@@ -1,24 +1,57 @@
-# README
+# Just do it
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Just do it is an todo app that allows users to keep track of their tasks. It is
+written using Ruby on Rails. The authentication system is provided by
+(Devise)[http://devise.plataformatec.com.br] and the main test framework is
+(Rspec)[http://rspec.info/]. It is deployed in Heroku and you can see it
+(here)[https://dashboard.heroku.com/apps/polar-lowlands-60626].
 
-Things you may want to cover:
+Follow the instructions bellow to get Just do it app in your local environment.
 
-* Ruby version
+## Requirements
 
-* System dependencies
+Before start, make sure you have the following tools installed:
 
-* Configuration
+* ruby 2.4.2
+* rails >= 5.2.0
+* PostgreSQL
 
-* Database creation
+## Setting up
 
-* Database initialization
+First, get the application code:
 
-* How to run the test suite
+```
+git clone https://gitlab.com/bahartmann/just-do-it.git`
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+```
+cd just-do-it
+```
 
-* Deployment instructions
+Now, install the required gems:
+```
+bundle
+```
 
-* ...
+And create the database and set the schema:
+```
+rake db:create db:migrate
+```
+
+## Run test suite
+
+We're using RSpec in the tests. Run he suite with:
+
+```
+bundle exec rspec
+```
+
+## Start the app
+
+To start the application server, run:
+```
+rails s
+```
+
+Now, it should be possible to see the Just do it app accessing
+[http://0.0.0.0:3000/](http://0.0.0.0:3000/) in your browser.
