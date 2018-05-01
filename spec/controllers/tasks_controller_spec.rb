@@ -10,7 +10,11 @@ RSpec.describe TasksController, type: :controller do
   end
 
   describe 'GET index' do
-    it 'should assign tasks' do
+
+    it 'should assign tasks from user' do
+      other_user = FactoryBot.create :user
+      other_user_task = FactoryBot.create :task, user_id: other_user.id
+
       get :index
       expect(assigns(:tasks)).to eq([task])
     end
