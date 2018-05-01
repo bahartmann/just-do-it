@@ -17,7 +17,7 @@ RSpec.feature "Tasks", type: :system do
     expect {
       click_link "New Task"
       fill_in "Description", with: "Something to do"
-      click_button "Create Task"
+      click_button "Save task"
 
       expect(page).to have_content "Task was successfully created."
     }.to change(user.tasks, :count).by(1)
@@ -31,7 +31,7 @@ RSpec.feature "Tasks", type: :system do
 
     click_link "Edit"
     fill_in "Description", with: "Read newspaper"
-    click_button "Update Task"
+    click_button "Save task"
 
     expect(page).to have_content "Task was successfully updated."
     expect(page).to have_content "Read newspaper"
@@ -45,7 +45,7 @@ RSpec.feature "Tasks", type: :system do
 
     click_link "Edit"
     check "Done"
-    click_button "Update Task"
+    click_button "Save task"
     expect(page.first(".task")).to have_content "true"
   end
 
