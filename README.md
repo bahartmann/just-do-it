@@ -40,7 +40,8 @@ rake db:create db:migrate
 
 ## Run test suite
 
-We're using RSpec in the tests. Run he suite with:
+The application has unit tests and systems tests, both written with RSpec. Run
+the suite with:
 
 ```
 bundle exec rspec
