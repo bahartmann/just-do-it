@@ -37,4 +37,20 @@ RSpec.feature "Tasks", type: :system do
     expect(page).to have_content "Read newspaper"
   end
 
+  scenario "user destroys Task", js: true do
+    task = FactoryBot.create(:task, description: "Read book", user_id: user.id)
+
+    login_as user
+    visit tasks_url
+
+    expect {
+      click_link "Edit"
+
+      accept_alert do
+        click_link "Destroy task"
+      end
+
+      expect(page).to have_content "Task was successfully destroyed."
+    }.to change(user.tasks, :count).by(-1)
+  end
 end
