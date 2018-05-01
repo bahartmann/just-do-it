@@ -1,22 +1,37 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>JustDoIt</title>
+    <title>Just do it!</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
   </head>
-
   <body>
-    <% if user_signed_in? %>
-      <li><%= link_to 'Edit registration', edit_user_registration_path %></li>
-      <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
-    <% end %>
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
 
-    <p id="notice" class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
+      <h5 class="my-0 mr-md-auto font-weight-normal">Just do it!</h5>
+
+      <% if user_signed_in? %>
+        <nav class="my-2 my-md-0 mr-md-3">
+          <%= link_to("Edit registration", edit_user_registration_path, class: 'p-2 text-dark') %>
+          <%= link_to("Logout", destroy_user_session_path, method: :delete, class: "p-2 text-dark") %>
+        </nav>
+
+        <%= link_to 'New task', new_task_path, class: 'btn btn-outline-primary' %>
+      <% end %>
+    </div>
+
+    <main role="main" class="container">
+
+      <% flash.each do |name, msg| %>
+      <%= content_tag(:div, msg, class: "alert alert-info") %>
+      <% end %>
+
+      <%= yield %>
+    </main>
+
   </body>
 </html>
