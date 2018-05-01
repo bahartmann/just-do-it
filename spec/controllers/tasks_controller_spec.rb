@@ -51,7 +51,7 @@ RSpec.describe TasksController, type: :controller do
   end
 
   describe 'PUT update' do
-    let(:undone_task) { FactoryBot.create :task, done: false }
+    let(:undone_task) { FactoryBot.create :task, done: false, user_id: user.id }
 
     it 'should update existent task' do
       put :update, params: {
@@ -71,14 +71,14 @@ RSpec.describe TasksController, type: :controller do
 
   describe 'DELETE destroy' do
     it 'destroy task' do
-      task = FactoryBot.create :task
+      task = FactoryBot.create :task, user_id: user.id
       expect{
         delete :destroy, params: { id: task.id }
       }.to change(Task, :count).by(-1)
     end
 
     it 'should redirect to index' do
-      task = FactoryBot.create :task
+      task = FactoryBot.create :task, user_id: user.id
       delete :destroy, params: { id: task.id }
       expect(response).to redirect_to(tasks_url)
     end
