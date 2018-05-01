@@ -8,6 +8,7 @@ require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 require 'capybara/rspec'
+require 'support/capybara'
 require 'support/factory_bot'
 
 # The following line is provided for convenience purposes. It has the downside
