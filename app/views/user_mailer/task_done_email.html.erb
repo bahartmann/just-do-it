@@ -4,6 +4,6 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>You just did it!</h1>
+    <%= content_tag(:p, @message_text, style: "color:#{@message_color}") %>
   </body>
 </html>

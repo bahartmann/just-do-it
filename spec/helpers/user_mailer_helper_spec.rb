@@ -4,10 +4,10 @@ RSpec.describe UserMailerHelper, type: :helper do
   describe "#random_congrats_message" do
     it "returns a random text" do
       possible_phrases = [
-        "Yeah! One task done.",
+        "Congratulations! One task done.",
         "Your task is done. Congratulations!",
         "Congratulations, you completed your task!",
-        "Be proud! One task done.",
+        "Be proud! Congratulations for one task done.",
         "Congratulations for a completed task!"
       ]
 

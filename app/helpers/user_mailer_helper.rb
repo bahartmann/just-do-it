@@ -9,10 +9,10 @@ module UserMailerHelper
   end
 
   CONGRATULATION_MSGS = [
-    "Yeah! One task done.",
+    "Congratulations! One task done.",
     "Your task is done. Congratulations!",
     "Congratulations, you completed your task!",
-    "Be proud! One task done.",
+    "Be proud! Congratulations for one task done.",
     "Congratulations for a completed task!"
   ]
 

@@ -1,7 +1,10 @@
 class UserMailer < ApplicationMailer
-  default from: 'do-not-reply@justdoit.com'
+  include UserMailerHelper
 
-  def task_done_mail(user)
-      mail(to: user.email, subject: 'You just did it!')
-   end
+  def task_done_email
+    @user = params[:user]
+    @message_text = random_congrats_message
+    @message_color = random_color
+    mail(to: @user.email, subject: 'You just did it!')
+  end
 end
