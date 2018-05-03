@@ -1,7 +1,11 @@
 module UserMailerHelper
 
-  def congratulation_message
-    { text: CONGRATULATION_MSGS.sample }
+  def random_congrats_message
+    CONGRATULATION_MSGS.sample
+  end
+
+  def random_color
+    COLORS.sample
   end
 
   CONGRATULATION_MSGS = [
@@ -10,5 +14,13 @@ module UserMailerHelper
     "Congratulations, you completed your task!",
     "Be proud! One task done.",
     "Congratulations for a completed task!"
+  ]
+
+  COLORS = [
+    "#007bff",
+    "#28a745",
+    "#dc3545",
+    "#ffc107",
+    "#17a2b8"
   ]
 end
