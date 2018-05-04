@@ -1,4 +1,8 @@
 FactoryBot.define do
+  factory :event do
+    type "MyString"
+    payload "{ color: \"#767676\", phrase: \"Congratulations!\"}"
+  end
 
   factory :user do
     name "Ana"
