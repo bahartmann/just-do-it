@@ -54,6 +54,9 @@ group :development, :test do
   gem 'selenium-webdriver', '~> 3.8.0'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper', '~> 1.1.0'
+
+  gem 'pry'
+  gem 'pry-nav'
 end
 
 group :development do
