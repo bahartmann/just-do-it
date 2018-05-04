@@ -73,7 +73,9 @@ RSpec.describe TasksController, type: :controller do
     end
 
     context 'when task is updated to done' do
-      #TODO test if mail received deliver_now
+      let (:undone_task) { FactoryBot.create :task, done: false, user_id: user.id }
+
+      #TODO test if mailer and tracker are called when task changes to done
     end
   end
 

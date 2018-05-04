@@ -41,7 +41,7 @@ class TasksController < ApplicationController
     marked_as_done = done_changed_to_true
     respond_to do |format|
       if @task.update(task_params)
-        send_done_email if marked_as_done
+        notify_task_done if marked_as_done
         flash[:notice] = 'Task was successfully updated.'
         format.html { redirect_to tasks_url }
         format.json { render :index, status: :ok, location: @task }
@@ -74,10 +74,16 @@ class TasksController < ApplicationController
       params.require(:task).permit(:description, :done)
     end
 
-    def send_done_email
+    def notify_task_done
       text = random_congrats_message
       color = random_color
+
       UserMailer.with(user: current_user).task_done_email(text, color).deliver_now
+      Event.new(
+        user_id: current_user.id,
+        event_type: "task_done",
+        payload: { message_text: text, message_color: color}
+      ).save
     end
 
     def done_changed_to_true
