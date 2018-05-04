@@ -1,4 +1,5 @@
 class TasksController < ApplicationController
+  include UserMailerHelper
   before_action :set_task, only: [:edit, :update, :destroy]
 
   # GET /tasks
@@ -37,11 +38,10 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1
   # PATCH/PUT /tasks/1.json
   def update
+    marked_as_done = done_changed_to_true
     respond_to do |format|
-      marked_as_done = done_changed_to_true
-
       if @task.update(task_params)
-        send_done_notification_email if marked_as_done
+        send_done_email if marked_as_done
         flash[:notice] = 'Task was successfully updated.'
         format.html { redirect_to tasks_url }
         format.json { render :index, status: :ok, location: @task }
@@ -74,8 +74,10 @@ class TasksController < ApplicationController
       params.require(:task).permit(:description, :done)
     end
 
-    def send_done_notification_email
-      UserMailer.with(user: current_user).task_done_email.deliver_now
+    def send_done_email
+      text = random_congrats_message
+      color = random_color
+      UserMailer.with(user: current_user).task_done_email(text, color).deliver_now
     end
 
     def done_changed_to_true
