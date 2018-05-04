@@ -11,7 +11,7 @@ RSpec.describe TasksController, type: :controller do
 
   describe 'GET index' do
 
-    it 'should assign tasks from user' do
+    it 'assigns tasks from user' do
       other_user = FactoryBot.create :user
       other_user_task = FactoryBot.create :task, user_id: other_user.id
 
@@ -19,14 +19,14 @@ RSpec.describe TasksController, type: :controller do
       expect(assigns(:tasks)).to eq([task])
     end
 
-    it 'should render index' do
+    it 'renders index' do
       get :index
       expect(response).to render_template(:index)
     end
   end
 
   describe 'GET new' do
-    it 'should render new template' do
+    it 'renders new template' do
       get :new
       expect(response).to render_template(:new)
     end
@@ -35,39 +35,39 @@ RSpec.describe TasksController, type: :controller do
   describe 'POST create' do
     let(:task_params) { { task: FactoryBot.attributes_for(:task) } }
 
-    it 'should create new task' do
+    it 'creates new task' do
       expect{
         post :create, params: task_params
       }.to change(Task, :count).by(1)
     end
 
-    it 'should redirect to index' do
+    it 'redirects to index' do
       post :create, params: task_params
       expect(response).to redirect_to(tasks_url)
     end
   end
 
   describe 'GET edit' do
-    it 'should render edit template' do
+    it 'renders edit template' do
       get :edit, params: { id: task.id }
       expect(response).to render_template(:edit)
     end
   end
 
   describe 'PUT update' do
-    let(:undone_task) { FactoryBot.create :task, done: false, user_id: user.id }
+    let(:some_task) { FactoryBot.create :task, description: "Eat", user_id: user.id }
 
-    it 'should update existent task' do
+    it 'updates task attributes' do
       put :update, params: {
-          id: undone_task.id, task: { done: true }
+          id: some_task.id, task: { description: "Drink" }
       }
-      undone_task.reload
-      expect(undone_task.done).to be true
+      some_task.reload
+      expect(some_task.description).to eq("Drink")
     end
 
-    it 'should redirect to index' do
+    it 'redirects to index' do
       put :update, params: {
-          id: undone_task.id, task: { done: true }
+          id: some_task.id, task: { description: "Drink" }
       }
       expect(response).to redirect_to(tasks_url)
     end
