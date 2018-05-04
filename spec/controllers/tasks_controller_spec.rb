@@ -71,6 +71,10 @@ RSpec.describe TasksController, type: :controller do
       }
       expect(response).to redirect_to(tasks_url)
     end
+
+    context 'when task is updated to done' do
+      #TODO test if mail received deliver_now
+    end
   end
 
   describe 'DELETE destroy' do

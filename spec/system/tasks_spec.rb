@@ -43,10 +43,28 @@ RSpec.feature "Tasks", type: :system do
     login_as user
     visit tasks_url
 
-    click_link "Edit"
-    check "Done"
-    click_button "Save task"
+    expect {
+      click_link "Edit"
+      check "Done"
+      click_button "Save task"
+    }.to change { ActionMailer::Base.deliveries.count }.by(1)
+
     expect(page.first(".task")).to have_content "true"
+  end
+
+  scenario "user marks Task as undone back" do
+    task = FactoryBot.create(:task, description: "Read book", user_id: user.id, done: true)
+
+    login_as user
+    visit tasks_url
+
+    expect {
+      click_link "Edit"
+      uncheck "Done"
+      click_button "Save task"
+    }.to change { ActionMailer::Base.deliveries.count }.by(0)
+
+    expect(page.first(".task")).to have_content "false"
   end
 
   scenario "user destroys Task", js: true do
