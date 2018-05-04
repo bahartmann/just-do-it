@@ -30,3 +30,6 @@ config/environment_variables.yml
 
 # Ignore rspec example status
 spec/examples.txt
+
+# Ignore export path
+/exports
