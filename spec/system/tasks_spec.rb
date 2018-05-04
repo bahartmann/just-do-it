@@ -43,12 +43,9 @@ RSpec.feature "Tasks", type: :system do
     login_as user
     visit tasks_url
 
-    expect {
-      click_link "Edit"
-      check "Done"
-      click_button "Save task"
-    }.to change { ActionMailer::Base.deliveries.count }.by(1)
-    
+    click_link "Edit"
+    check "Done"
+    click_button "Save task"
     expect(page.first(".task")).to have_content "true"
   end
 
