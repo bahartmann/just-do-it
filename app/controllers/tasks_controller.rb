@@ -38,7 +38,10 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1.json
   def update
     respond_to do |format|
+      marked_as_done = done_changed_to_true
+
       if @task.update(task_params)
+        send_done_notification_email if marked_as_done
         flash[:notice] = 'Task was successfully updated.'
         format.html { redirect_to tasks_url }
         format.json { render :index, status: :ok, location: @task }
@@ -69,5 +72,15 @@ class TasksController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
       params.require(:task).permit(:description, :done)
+    end
+
+    def send_done_notification_email
+      UserMailer.with(user: current_user).task_done_email.deliver_now
+    end
+
+    def done_changed_to_true
+      was_undone = !@task.done
+      is_done = (params[:task][:done])
+      was_undone && is_done
     end
 end
