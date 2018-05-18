@@ -2,9 +2,9 @@
 
 Just do it is an todo app that allows users to keep track of their tasks. It is
 written using Ruby on Rails. The authentication system is provided by
-(Devise)[http://devise.plataformatec.com.br] and the main test framework is
-(Rspec)[http://rspec.info/]. It is deployed in Heroku and you can see it
-(here)[https://justdoit-demo.herokuapp.com/].
+[Devise](http://devise.plataformatec.com.br) and the main test framework is
+[Rspec](http://rspec.info/). It is deployed in Heroku and you can see it
+[here](https://justdoit-demo.herokuapp.com/).
 
 Follow the instructions bellow to get Just do it app in your local environment.
 
